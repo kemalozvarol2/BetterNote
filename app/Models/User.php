@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'theme'
     ];
 
     /**
@@ -43,5 +44,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class)->orderBy('created_at', 'desc');
+    }
+
+    public function tags(){
+        return $this->hasMany(Tag::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -30,7 +31,8 @@ class NoteController extends Controller
     {
         auth()->user()->notes()->create([
             'title' => $request->title,
-            'body' => $request->body
+            'body' => $request->body,
+            'slug' => Str::slug($request->title)
         ]);
 
         return back()->with(['success' => 'Note saved.']);

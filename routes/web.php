@@ -16,7 +16,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('notes', NoteController::class)->middleware(['auth', 'verified']);
+Route::resource('notes', NoteController::class)->middleware(['auth', 'verified'])->parameters(['notes' => 'note:slug']);
 
 Route::get('toggle_theme', function (){
     if(auth()->user()->theme == 'dark'){
